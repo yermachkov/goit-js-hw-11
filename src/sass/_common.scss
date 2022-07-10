@@ -1,1 +1,16 @@
 @import '~node_modules/modern-normalize/modern-normalize.css';
+
+button {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+
+a:visited {
+  color: none;
+}
