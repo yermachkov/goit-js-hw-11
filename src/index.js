@@ -18,10 +18,14 @@ const pics = new PicsApiService();
 function onFormSubmit(event) {
   event.preventDefault();
 
-  pics.searchQuery = event.target.elements.searchQuery.value;
+  pics.searchQuery = event.target.elements.searchQuery.value.trim();
   pics.resetPage();
   clearGalleryMarkup();
   loadMoreBtn.classList.add('is-hidden');
+
+  if (pics.searchQuery === "" || pics.searchQuery === " ") {
+    return;
+  }
 
   pics.fetchPics().then(response => {
     if (response.hits.length === 0) {
