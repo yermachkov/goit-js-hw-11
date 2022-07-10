@@ -22,7 +22,7 @@ export default class PicsApiService {
     try {
       const response = await axios.get(`/?${searchParams}`);
       this.page += 1;
-      return response.data.hits;
+      return response.data;
   } catch (error) {
     console.error(error);
   }

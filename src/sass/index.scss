@@ -34,10 +34,11 @@ button.is-hidden {
   overflow: hidden;
   text-decoration: none;
   color: inherit;
+  border-radius: 5px;
 }
 
 .photo-card img {
-  height: 250px;
+  height: 240px;
   width: 100%;
   object-fit: cover;
 }
