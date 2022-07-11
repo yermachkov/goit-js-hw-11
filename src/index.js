@@ -24,7 +24,7 @@ function onFormSubmit(event) {
   loadMoreBtn.classList.add('is-hidden');
 
   if (pics.searchQuery === "" || pics.searchQuery === " ") {
-    return;
+    return  Notiflix.Notify.warning(`Search field is empty!`);
   }
 
   pics.fetchPics().then(response => {
@@ -45,15 +45,9 @@ function onFormSubmit(event) {
 
 function onLoadMore() {
   pics.fetchPics().then(response => {
+    onLastPage(response.totalHits, 40, pics.page);
     renderGallery(response.hits);
-    const finalPage = Math.ceil(response.totalHits / 40);
-    console.log(finalPage);
-    
-    if (pics.page === finalPage) {
-      loadMoreBtn.classList.add('is-hidden');
-      Notiflix.Notify.warning("We're sorry, but you've reached the end of search results.");
-    }
-  })
+    })
 };
 
 function createMarkup(data) {
@@ -90,3 +84,13 @@ function renderGallery(markup) {
 function clearGalleryMarkup() {
   gallery.innerHTML = "";
 };
+
+
+function onLastPage(totalHits, perPage, currentPage) {
+  const lastPage = totalHits / perPage <= (currentPage - 1);
+  if (lastPage) {
+    loadMoreBtn.classList.add('is-hidden');
+    Notiflix.Notify.warning("We're sorry, but you've reached the end of search results.");
+    return;
+    }
+}
