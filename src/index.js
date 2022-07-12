@@ -47,6 +47,7 @@ function onLoadMore() {
   pics.fetchPics().then(response => {
     onLastPage(response.totalHits, 40, pics.page);
     renderGallery(response.hits);
+    autoScroll();
     })
 };
 
@@ -94,3 +95,16 @@ function onLastPage(totalHits, perPage, currentPage) {
     return;
     }
 }
+
+
+function autoScroll () {
+  const { height: cardHeight } = document
+    .querySelector(".gallery")
+    .firstElementChild.getBoundingClientRect();
+
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: "smooth",
+  });
+  console.log("autoscroll");
+};
